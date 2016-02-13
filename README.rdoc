@@ -1,0 +1,8 @@
+== Bookshelf
+
+Keeping track of books i have read. CS210 is teaching rails so i might
+as well build something i will actually use.
+
+* ruby 2.2.4
+* rails 4.2.5
+* sqlite in development
