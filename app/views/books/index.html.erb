@@ -15,7 +15,4 @@
   <% end %>
 </table>
 
-<p>
-  <%= @books.length %> books,
-  <%= @books.map { |b| b.pages.to_i }.inject(0) { |a, b| a + b } %> pages
-</p>
+<%= link_to 'Add a book', new_book_path %>
