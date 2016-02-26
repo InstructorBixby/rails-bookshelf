@@ -1,0 +1,9 @@
+<h1><%= @book.title %></h1>
+
+<p><%= @book.author %></p>
+<p><%= @book.pages %> pages</p>
+<p>ISBN <%= @book.isbn %></p>
+
+<%= link_to 'Edit', edit_book_path(@book) %> |
+<%= link_to 'Delete', @book, method: :delete, data: { confirm: 'Sure?' } %> |
+<%= link_to 'Back', books_path %>
