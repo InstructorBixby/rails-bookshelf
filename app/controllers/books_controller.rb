@@ -15,7 +15,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     if @book.save
-      redirect_to books_path
+      redirect_to books_path, notice: 'Added.'
     else
       render 'new'
     end
@@ -26,7 +26,7 @@ class BooksController < ApplicationController
 
   def update
     if @book.update(book_params)
-      redirect_to @book
+      redirect_to @book, notice: 'Saved.'
     else
       render 'edit'
     end
@@ -34,7 +34,7 @@ class BooksController < ApplicationController
 
   def destroy
     @book.destroy
-    redirect_to books_path
+    redirect_to books_path, notice: 'Gone.'
   end
 
   private
