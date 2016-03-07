@@ -2,3 +2,25 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  font-family: Georgia, serif;
+  color: #222;
+  background: #fbfbf8;
+  margin: 0;
+}
+
+.container {
+  max-width: 760px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+h1 { font-weight: normal; }
+
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid #eee; }
+th { font-size: 13px; text-transform: uppercase; color: #777; }
+
+.notice { background: #efe; border: 1px solid #cdc; padding: 8px; }
+.errors { background: #fee; border: 1px solid #dcc; padding: 8px 8px 8px 24px; }
