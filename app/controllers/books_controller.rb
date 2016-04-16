@@ -2,7 +2,12 @@ class BooksController < ApplicationController
   before_filter :set_book, only: [:show, :edit, :update, :destroy]
 
   def index
-    @books = Book.all
+    @status = params[:status]
+    @books = if Book::STATUSES.include?(@status)
+               Book.where(status: @status)
+             else
+               Book.all
+             end
   end
 
   def show
