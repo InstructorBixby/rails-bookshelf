@@ -21,6 +21,18 @@ describe Book do
     expect(build(:book, status: 'borrowed')).not_to be_valid
   end
 
+  it 'rejects a rating of 9' do
+    expect(build(:book, rating: 9)).not_to be_valid
+  end
+
+  it 'allows no rating at all' do
+    expect(build(:book, rating: nil)).to be_valid
+  end
+
+  it 'draws stars' do
+    expect(build(:book, rating: 3).stars).to eq('***')
+  end
+
   describe 'scopes' do
     it 'only returns read books' do
       read = create(:book, status: 'read')
