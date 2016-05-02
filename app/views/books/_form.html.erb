@@ -11,5 +11,7 @@
   <p><%= f.label :isbn %><br><%= f.text_field :isbn %></p>
   <p><%= f.label :pages %><br><%= f.number_field :pages %></p>
   <p><%= f.label :status %><br><%= f.select :status, Book::STATUSES %></p>
+  <p><%= f.label :rating %><br><%= f.select :rating, (1..5), include_blank: true %></p>
+  <p><%= f.label :finished_on %><br><%= f.date_field :finished_on %></p>
   <p><%= f.submit %></p>
 <% end %>

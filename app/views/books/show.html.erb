@@ -3,6 +3,9 @@
 <p><%= @book.author %></p>
 <p><%= @book.pages %> pages</p>
 <p>ISBN <%= @book.isbn %></p>
+<p><%= @book.status %><% if @book.finished_on %>,
+  finished <%= @book.finished_on.strftime('%B %-d') %><% end %></p>
+<p><%= @book.stars %></p>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Delete', @book, method: :delete, data: { confirm: 'Sure?' } %> |
