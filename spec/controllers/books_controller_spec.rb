@@ -7,6 +7,20 @@ describe BooksController do
       get :index
       expect(assigns(:books)).to eq([b])
     end
+
+    it 'filters by status' do
+      read = create(:book, status: 'read')
+      create(:book, status: 'unread')
+      get :index, status: 'read'
+      expect(assigns(:books)).to eq([read])
+    end
+
+    it 'searches the author' do
+      hit = create(:book, author: 'Ursula K. Le Guin')
+      create(:book, author: 'Someone Else')
+      get :index, q: 'Le Guin'
+      expect(assigns(:books)).to eq([hit])
+    end
   end
 
   describe 'POST create' do

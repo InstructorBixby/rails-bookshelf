@@ -3,11 +3,10 @@ class BooksController < ApplicationController
 
   def index
     @status = params[:status]
-    @books = if Book::STATUSES.include?(@status)
-               Book.where(status: @status)
-             else
-               Book.all
-             end
+    @q = params[:q]
+    @books = Book.all
+    @books = @books.where(status: @status) if Book::STATUSES.include?(@status)
+    @books = @books.search(@q) if @q.present?
   end
 
   def show
@@ -49,6 +48,7 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:title, :author, :isbn, :pages, :status)
+    params.require(:book).permit(:title, :author, :isbn, :pages, :status,
+                                 :rating, :finished_on)
   end
 end
