@@ -1,12 +1,15 @@
 class BooksController < ApplicationController
   before_filter :set_book, only: [:show, :edit, :update, :destroy]
 
+  PER_PAGE = 25
+
   def index
     @status = params[:status]
     @q = params[:q]
-    @books = Book.all
-    @books = @books.where(status: @status) if Book::STATUSES.include?(@status)
-    @books = @books.search(@q) if @q.present?
+    books = Book.order('title')
+    books = books.where(status: @status) if Book::STATUSES.include?(@status)
+    books = books.search(@q) if @q.present?
+    @books = books.paginate(page: params[:page], per_page: PER_PAGE)
   end
 
   def show
