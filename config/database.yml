@@ -11,6 +11,9 @@ test:
   <<: *default
   database: db/test.sqlite3
 
+# heroku overwrites this with DATABASE_URL anyway but rails still wants
+# the key to exist
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
