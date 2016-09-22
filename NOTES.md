@@ -13,3 +13,11 @@ compiled files.
 
 if the dyno 500s, `heroku logs --tail` and look for the
 ActionView::Template::Error line, not the big stack after it.
+
+spring
+------
+
+ran a migration, the console kept insisting the column did not exist.
+it was spring holding a preloaded copy of the app from before the
+migration. `bin/spring stop` (or `pkill -f spring`) and it picks the
+new schema up. this is apparently well known and cost me an hour.
