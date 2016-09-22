@@ -1,0 +1,11 @@
+<%= form_tag books_path, method: :get, class: 'search' do %>
+  <%= text_field_tag :q, @q, placeholder: 'title or author' %>
+  <%= submit_tag 'Search', name: nil %>
+<% end %>
+
+<p class="filters">
+  <%= link_to 'all', books_path %> |
+  <% Book::STATUSES.each do |s| %>
+    <%= link_to s, books_path(status: s) %>
+  <% end %>
+</p>
