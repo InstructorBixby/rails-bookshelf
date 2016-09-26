@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= content_for?(:title) ? yield(:title) : 'Bookshelf' %></title>
+  <title>Bookshelf</title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -9,8 +9,23 @@
 <body>
 
 <div class="container">
+  <p class="nav">
+    <%= link_to 'Bookshelf', root_path %>
+    <% if logged_in? %>
+      <span class="right">
+        <%= current_user.name %>
+        <%= link_to 'log out', logout_path, method: :delete %>
+      </span>
+    <% else %>
+      <span class="right"><%= link_to 'log in', login_path %></span>
+    <% end %>
+  </p>
+
   <% if notice %>
     <p class="notice"><%= notice %></p>
+  <% end %>
+  <% if flash[:alert] %>
+    <p class="errors"><%= flash[:alert] %></p>
   <% end %>
 
   <%= yield %>
