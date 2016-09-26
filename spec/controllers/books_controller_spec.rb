@@ -23,7 +23,22 @@ describe BooksController do
     end
   end
 
-  describe 'POST create' do
+  describe 'when nobody is logged in' do
+    it 'will not show the new form' do
+      get :new
+      expect(response).to redirect_to(login_path)
+    end
+
+    it 'will not create' do
+      expect {
+        post :create, book: { title: 'Dune', author: 'Herbert' }
+      }.not_to change(Book, :count)
+    end
+  end
+
+  describe 'logged in' do
+    before(:each) { log_in_as(create(:user)) }
+
     it 'saves a valid book' do
       expect {
         post :create, book: { title: 'Dune', author: 'Herbert', pages: 412 }
@@ -40,9 +55,7 @@ describe BooksController do
       post :create, book: { title: '', author: '' }
       expect(response).to render_template('new')
     end
-  end
 
-  describe 'DELETE destroy' do
     it 'removes the book' do
       b = create(:book)
       expect { delete :destroy, id: b.id }.to change(Book, :count).by(-1)

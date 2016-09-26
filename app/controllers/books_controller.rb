@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_filter :require_login, except: [:index, :show]
   before_filter :set_book, only: [:show, :edit, :update, :destroy]
 
   PER_PAGE = 25
