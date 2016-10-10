@@ -1,6 +1,8 @@
 class Book < ActiveRecord::Base
   STATUSES = %w(unread reading read)
 
+  belongs_to :user
+
   validates :title, presence: true
   validates :author, presence: true
   validates :pages, numericality: { only_integer: true,
@@ -13,9 +15,6 @@ class Book < ActiveRecord::Base
   scope :reading, -> { where(status: 'reading') }
   scope :read, -> { where(status: 'read') }
 
-  # the ? placeholders matter. i had this built with string
-  # interpolation first and a title with an apostrophe in it broke the
-  # query, which is apparently also how you get sql injection.
   scope :search, lambda { |q|
     where('title LIKE ? OR author LIKE ?', "%#{q}%", "%#{q}%")
   }

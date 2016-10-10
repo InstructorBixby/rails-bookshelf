@@ -3,5 +3,6 @@ FactoryGirl.define do
     sequence(:title) { |n| "Book #{n}" }
     author 'A Writer'
     pages 300
+    user
   end
 end
