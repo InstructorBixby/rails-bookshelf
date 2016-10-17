@@ -1,4 +1,4 @@
-class AddUserToBooks < ActiveRecord::Migration
+class AddUserToBooks < ActiveRecord::Migration[4.2]
   def up
     add_column :books, :user_id, :integer
     add_index :books, :user_id

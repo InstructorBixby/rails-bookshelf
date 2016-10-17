@@ -1,4 +1,4 @@
-class Book < ActiveRecord::Base
+class Book < ApplicationRecord
   STATUSES = %w(unread reading read)
 
   belongs_to :user

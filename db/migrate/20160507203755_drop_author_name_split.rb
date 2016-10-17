@@ -1,8 +1,4 @@
-# "Ursula K. Le Guin" -> first "Ursula K. Le", last "Guin" and
-# "bell hooks" -> last "hooks". splitting a name on spaces does not
-# work and i cannot see a rule that does, so sorting by author is
-# going back to sorting by the whole string.
-class DropAuthorNameSplit < ActiveRecord::Migration
+class DropAuthorNameSplit < ActiveRecord::Migration[4.2]
   def up
     remove_column :books, :author_first
     remove_column :books, :author_last

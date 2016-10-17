@@ -1,4 +1,4 @@
-class SplitAuthorName < ActiveRecord::Migration
+class SplitAuthorName < ActiveRecord::Migration[4.2]
   def up
     add_column :books, :author_first, :string
     add_column :books, :author_last, :string
