@@ -17,3 +17,6 @@ it touched:
   block now and the column alignment is gone, so schema.rb looks like a
   huge diff even though nothing about the database changed.
 * sdoc is not in the default Gemfile any more so i dropped it.
+* `assigns` and `render_template` are gone from controller specs. they
+  live in rails-controller-testing now. the error just says undefined
+  method `assigns' which was not a helpful place to start.

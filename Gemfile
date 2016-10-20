@@ -14,6 +14,7 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
+  gem 'rails-controller-testing'
   gem 'sqlite3'
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5'
