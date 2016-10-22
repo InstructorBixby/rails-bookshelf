@@ -11,14 +11,14 @@ describe BooksController do
     it 'filters by status' do
       read = create(:book, status: 'read')
       create(:book, status: 'unread')
-      get :index, status: 'read'
+      get :index, params: { status: 'read' }
       expect(assigns(:books)).to eq([read])
     end
 
     it 'searches the author' do
       hit = create(:book, author: 'Ursula K. Le Guin')
       create(:book, author: 'Someone Else')
-      get :index, q: 'Le Guin'
+      get :index, params: { q: 'Le Guin' }
       expect(assigns(:books)).to eq([hit])
     end
   end
@@ -31,7 +31,7 @@ describe BooksController do
 
     it 'will not create' do
       expect {
-        post :create, book: { title: 'Dune', author: 'Herbert' }
+        post :create, params: { book: { title: 'Dune', author: 'Herbert' } }
       }.not_to change(Book, :count)
     end
   end
@@ -41,24 +41,27 @@ describe BooksController do
 
     it 'saves a valid book' do
       expect {
-        post :create, book: { title: 'Dune', author: 'Herbert', pages: 412 }
+        post :create, params: { book: { title: 'Dune', author: 'Herbert',
+                                        pages: 412 } }
       }.to change(Book, :count).by(1)
     end
 
     it 'does not save an invalid one' do
       expect {
-        post :create, book: { title: '', author: '' }
+        post :create, params: { book: { title: '', author: '' } }
       }.not_to change(Book, :count)
     end
 
     it 're-renders new when invalid' do
-      post :create, book: { title: '', author: '' }
+      post :create, params: { book: { title: '', author: '' } }
       expect(response).to render_template('new')
     end
 
     it 'removes the book' do
       b = create(:book)
-      expect { delete :destroy, id: b.id }.to change(Book, :count).by(-1)
+      expect {
+        delete :destroy, params: { id: b.id }
+      }.to change(Book, :count).by(-1)
     end
   end
 end
