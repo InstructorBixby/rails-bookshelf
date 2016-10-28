@@ -1,5 +1,9 @@
 require 'rails_helper'
 
+# belongs_to_required_by_default is on in new_framework_defaults, so a
+# Book with no user is invalid and every one of these was red until the
+# factory got a user association. the message is just "User must exist"
+# which did not immediately point at the config.
 describe Book do
   it 'needs a title' do
     expect(build(:book, title: nil)).not_to be_valid
@@ -9,7 +13,11 @@ describe Book do
     expect(build(:book, author: nil)).not_to be_valid
   end
 
-  it 'is valid with both' do
+  it 'needs a user' do
+    expect(build(:book, user: nil)).not_to be_valid
+  end
+
+  it 'is valid from the factory' do
     expect(build(:book)).to be_valid
   end
 

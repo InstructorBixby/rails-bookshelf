@@ -1,7 +1,12 @@
-# bin/rake db:seed
+# bin/rails db:seed
 # a handful of books off my shelf so the list is not empty
 
-Book.destroy_all
+me = User.find_or_create_by!(email: 'me@example.com') do |u|
+  u.name = 'Me'
+  u.password = 'changeme'
+end
+
+me.books.destroy_all
 
 [
   ['The Dispossessed', 'Ursula K. Le Guin', 341, 'read', 5],
@@ -13,9 +18,9 @@ Book.destroy_all
   ['Snow Crash', 'Neal Stephenson', 440, 'read', 4],
   ['The Soul of a New Machine', 'Tracy Kidder', 293, 'unread', nil]
 ].each do |title, author, pages, status, rating|
-  Book.create!(title: title, author: author, pages: pages,
-               status: status, rating: rating,
-               finished_on: status == 'read' ? Date.today - rand(400) : nil)
+  me.books.create!(title: title, author: author, pages: pages,
+                   status: status, rating: rating,
+                   finished_on: status == 'read' ? Date.today - rand(400) : nil)
 end
 
 puts "#{Book.count} books"
