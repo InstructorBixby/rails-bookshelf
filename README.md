@@ -8,13 +8,13 @@ setup
 -----
 
     bundle install
-    bin/rake db:schema:load db:seed
+    bin/rails db:schema:load db:seed
     bin/rails server
 
-* ruby 2.2.4, rails 4.2.5
+* ruby 2.3.1, rails 5.0
 * sqlite in development and test, postgres in production
 * rspec + factory_girl, `bundle exec rspec`
-* deployed to heroku, see NOTES.md
+* deployed to heroku, see NOTES.md and UPGRADE.md
 
 what it does
 ------------
@@ -22,3 +22,7 @@ what it does
 * add a book with title, author, isbn, pages
 * mark it unread / reading / read, rate it 1-5, record the date finished
 * filter by status, search title and author
+* log in, books belong to whoever added them
+
+`rake` still works for the db tasks but `rails` is the one the guides
+use now, so i am using that.
