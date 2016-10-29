@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :books
+  resources :books do
+    resources :notes, only: [:create, :destroy]
+  end
 
   get    'login'  => 'sessions#new'
   post   'login'  => 'sessions#create'
