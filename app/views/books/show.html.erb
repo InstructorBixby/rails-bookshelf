@@ -1,5 +1,3 @@
-<% content_for :title, @book.title %>
-
 <h1><%= @book.title %></h1>
 
 <p><%= @book.author %></p>
@@ -8,6 +6,32 @@
 <p><%= @book.status %><% if @book.finished_on %>,
   finished <%= @book.finished_on.strftime('%B %-d') %><% end %></p>
 <p><%= @book.stars %></p>
+
+<h2>Notes</h2>
+
+<% if @book.notes.empty? %>
+  <p class="empty">Nothing yet.</p>
+<% end %>
+
+<ul class="notes">
+  <% @book.notes.each do |note| %>
+    <li>
+      <% if note.page %><span class="page">p<%= note.page %></span><% end %>
+      <%= note.body %>
+      <% if logged_in? %>
+        <%= link_to 'x', book_note_path(@book, note), method: :delete %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<% if logged_in? %>
+  <%= form_for [@book, Note.new] do |f| %>
+    <p><%= f.text_area :body, rows: 3 %></p>
+    <p><%= f.label :page %> <%= f.number_field :page %>
+       <%= f.submit 'Add note' %></p>
+  <% end %>
+<% end %>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Delete', @book, method: :delete, data: { confirm: 'Sure?' } %> |

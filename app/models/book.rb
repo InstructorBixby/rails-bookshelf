@@ -2,6 +2,7 @@ class Book < ApplicationRecord
   STATUSES = %w(unread reading read)
 
   belongs_to :user
+  has_many :notes, dependent: :destroy
 
   validates :title, presence: true
   validates :author, presence: true
