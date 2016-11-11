@@ -1,0 +1,17 @@
+<%= form_for @book do |f| %>
+  <% if @book.errors.any? %>
+    <ul class="errors">
+      <% @book.errors.full_messages.each do |m| %>
+        <li><%= m %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <p><%= f.label :title %><br><%= f.text_field :title %></p>
+  <p><%= f.label :author %><br><%= f.text_field :author %></p>
+  <p><%= f.label :isbn %><br><%= f.text_field :isbn %></p>
+  <p><%= f.label :pages %><br><%= f.number_field :pages %></p>
+  <p><%= f.label :status %><br><%= f.select :status, Book::STATUSES %></p>
+  <p><%= f.label :rating %><br><%= f.select :rating, (1..5), include_blank: true %></p>
+  <p><%= f.label :finished_on %><br><%= f.date_field :finished_on %></p>
+  <p><%= f.submit %></p>
+<% end %>

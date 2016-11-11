@@ -7,9 +7,11 @@ class BooksController < ApplicationController
   def index
     @status = params[:status]
     @q = params[:q]
+    @tag = params[:tag]
     books = Book.order('title')
     books = books.where(status: @status) if Book::STATUSES.include?(@status)
     books = books.search(@q) if @q.present?
+    books = books.joins(:tags).where(tags: { name: @tag }) if @tag.present?
     @books = books.paginate(page: params[:page], per_page: PER_PAGE)
   end
 
@@ -53,6 +55,6 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :author, :isbn, :pages, :status,
-                                 :rating, :finished_on)
+                                 :rating, :finished_on, :tag_list)
   end
 end

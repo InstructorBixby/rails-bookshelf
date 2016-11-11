@@ -7,6 +7,12 @@
   finished <%= @book.finished_on.strftime('%B %-d') %><% end %></p>
 <p><%= @book.stars %></p>
 
+<p class="tags">
+  <% @book.tags.each do |tag| %>
+    <%= link_to tag.name, books_path(tag: tag.name), class: 'tag' %>
+  <% end %>
+</p>
+
 <h2>Notes</h2>
 
 <% if @book.notes.empty? %>

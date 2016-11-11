@@ -17,10 +17,29 @@ body {
 }
 
 h1 { font-weight: normal; }
+h2 { font-weight: normal; font-size: 18px; margin-top: 28px; }
 
 table { width: 100%; border-collapse: collapse; }
 th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid #eee; }
 th { font-size: 13px; text-transform: uppercase; color: #777; }
 
+.nav { border-bottom: 1px solid #ddd; padding-bottom: 8px; }
+.nav .right { float: right; }
+
 .notice { background: #efe; border: 1px solid #cdc; padding: 8px; }
 .errors { background: #fee; border: 1px solid #dcc; padding: 8px 8px 8px 24px; }
+.empty { color: #999; font-style: italic; }
+
+.tag {
+  display: inline-block;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  background: #eee;
+  padding: 2px 6px;
+  margin-right: 4px;
+  text-decoration: none;
+  color: #555;
+}
+
+ul.notes { padding-left: 18px; }
+ul.notes .page { color: #999; font-size: 12px; margin-right: 6px; }
