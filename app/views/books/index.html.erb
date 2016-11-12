@@ -8,6 +8,7 @@
     <th>Author</th>
     <th>Pages</th>
     <th>Status</th>
+    <th>Tags</th>
     <th></th>
   </tr>
   <% @books.each do |book| %>
@@ -16,6 +17,11 @@
       <td><%= book.author %></td>
       <td><%= book.pages %></td>
       <td><%= book.status %></td>
+      <td>
+        <% book.tags.each do |tag| %>
+          <%= link_to tag.name, books_path(tag: tag.name), class: 'tag' %>
+        <% end %>
+      </td>
       <td><%= link_to 'Edit', edit_book_path(book) %></td>
     </tr>
   <% end %>
