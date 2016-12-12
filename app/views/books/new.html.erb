@@ -1,5 +1,10 @@
 <h1>Add a book</h1>
 
+<%= form_tag lookup_books_path, class: 'lookup' do %>
+  <%= text_field_tag :isbn, @book.isbn, placeholder: 'ISBN' %>
+  <%= submit_tag 'Look it up', name: nil %>
+<% end %>
+
 <%= render 'form' %>
 
 <%= link_to 'Back', books_path %>

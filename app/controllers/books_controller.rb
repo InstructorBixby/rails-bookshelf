@@ -8,8 +8,6 @@ class BooksController < ApplicationController
     @status = params[:status]
     @q = params[:q]
     @tag = params[:tag]
-    # includes(:tags) turns 25 little tag queries into one. the log
-    # went from 30 lines per page load to 4.
     books = Book.includes(:tags).order('title')
     books = books.where(status: @status) if Book::STATUSES.include?(@status)
     books = books.search(@q) if @q.present?
@@ -22,6 +20,22 @@ class BooksController < ApplicationController
 
   def new
     @book = current_user.books.new
+  end
+
+  # the new form has an isbn box and a "look it up" button that posts
+  # here, fills the fields in and renders the form again
+  def lookup
+    @book = current_user.books.new(isbn: params[:isbn])
+    found = OpenLibrary.lookup(params[:isbn])
+    if found
+      @book.title = found[:title]
+      @book.author = found[:author]
+      @book.pages = found[:pages]
+      @book.cover_url = found[:cover_url]
+    else
+      flash.now[:alert] = 'Nothing found for that ISBN.'
+    end
+    render 'new'
   end
 
   def create
@@ -57,6 +71,7 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :author, :isbn, :pages, :status,
-                                 :rating, :finished_on, :tag_list)
+                                 :rating, :finished_on, :tag_list,
+                                 :cover_url)
   end
 end
