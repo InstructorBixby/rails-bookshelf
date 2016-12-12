@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>Bookshelf</title>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -11,6 +11,7 @@
 <div class="container">
   <p class="nav">
     <%= link_to 'Bookshelf', root_path %>
+    <%= link_to 'stats', stats_path %>
     <% if logged_in? %>
       <span class="right">
         <%= current_user.name %>

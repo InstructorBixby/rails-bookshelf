@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'stats' => 'stats#index'
+
   get    'login'  => 'sessions#new'
   post   'login'  => 'sessions#create'
   delete 'logout' => 'sessions#destroy'

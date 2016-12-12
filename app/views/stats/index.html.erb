@@ -1,0 +1,23 @@
+<h1>Stats</h1>
+
+<p><%= @total %> books finished, <%= number_with_delimiter @pages %> pages.</p>
+
+<h2>Per month</h2>
+<table>
+  <% @by_month.each do |month, count| %>
+    <tr>
+      <td><%= month %></td>
+      <td><%= '#' * count %> <%= count %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h2>Ratings</h2>
+<table>
+  <% 5.downto(1) do |r| %>
+    <tr>
+      <td><%= '*' * r %></td>
+      <td><%= @by_rating[r] || 0 %></td>
+    </tr>
+  <% end %>
+</table>
