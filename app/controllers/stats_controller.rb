@@ -5,5 +5,6 @@ class StatsController < ApplicationController
     @pages = read.sum(:pages)
     @by_month = Book.finished_per_month(12)
     @by_rating = Book.where.not(rating: nil).group(:rating).count
+    @goal = Goal.current_for(current_user)
   end
 end
