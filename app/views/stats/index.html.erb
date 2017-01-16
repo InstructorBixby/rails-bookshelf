@@ -6,6 +6,13 @@
   <div class="bar"><div class="fill" style="width: <%= @goal.percent %>%"></div></div>
 <% end %>
 
+<% if logged_in? %>
+  <%= form_tag goals_path, class: 'goal' do %>
+    <%= number_field_tag :target, @goal ? @goal.target : nil, min: 1 %>
+    <%= submit_tag @goal ? 'Change goal' : 'Set a goal', name: nil %>
+  <% end %>
+<% end %>
+
 <p><%= @total %> books finished, <%= number_with_delimiter @pages %> pages.</p>
 
 <h2>Per month</h2>

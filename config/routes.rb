@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :goals, only: [:create]
   get 'stats' => 'stats#index'
 
   get    'login'  => 'sessions#new'
