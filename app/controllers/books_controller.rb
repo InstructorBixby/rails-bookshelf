@@ -3,12 +3,18 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   PER_PAGE = 25
+  SORTS = { 'title' => 'title asc',
+            'author' => 'author asc',
+            'rating' => 'rating desc',
+            'finished' => 'finished_on desc' }.freeze
 
   def index
     @status = params[:status]
     @q = params[:q]
     @tag = params[:tag]
-    books = Book.includes(:tags).order('title')
+    @sort = SORTS.key?(params[:sort]) ? params[:sort] : 'title'
+
+    books = Book.includes(:tags).order(SORTS[@sort])
     books = books.where(status: @status) if Book::STATUSES.include?(@status)
     books = books.search(@q) if @q.present?
     books = books.joins(:tags).where(tags: { name: @tag }) if @tag.present?
@@ -22,8 +28,6 @@ class BooksController < ApplicationController
     @book = current_user.books.new
   end
 
-  # the new form has an isbn box and a "look it up" button that posts
-  # here, fills the fields in and renders the form again
   def lookup
     @book = current_user.books.new(isbn: params[:isbn])
     found = OpenLibrary.lookup(params[:isbn])
