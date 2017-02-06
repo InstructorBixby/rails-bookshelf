@@ -1,0 +1,6 @@
+first run: 412 offenses in 41 files.
+
+most of it is Style/StringLiterals (it wants single quotes), line
+length over 80, and Style/Documentation wanting a comment on top of
+every class. `rubocop -a` fixed 380 of them without me reading the
+diff, which was probably a bad idea but the specs still pass.
