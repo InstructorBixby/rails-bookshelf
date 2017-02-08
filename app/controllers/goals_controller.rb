@@ -2,8 +2,7 @@ class GoalsController < ApplicationController
   before_action :require_login
 
   def create
-    year = Date.today.year
-    goal = current_user.goals.find_or_initialize_by(year: year)
+    goal = current_user.goals.find_or_initialize_by(year: Date.today.year)
     goal.target = params[:target]
     if goal.save
       redirect_to stats_path, notice: 'Goal set.'
