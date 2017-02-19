@@ -1,0 +1,24 @@
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+    - 'db/migrate/*'
+    - 'bin/*'
+    - 'config/initializers/new_framework_defaults.rb'
+    - 'vendor/**/*'
+
+# it wants a comment above every single class including
+# class BookTag < ApplicationRecord, which would just say "a book tag"
+Style/Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 100
+
+# specs are allowed to be long, they are lists
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'config/routes.rb'
+
+Documentation:
+  Enabled: false
