@@ -18,7 +18,20 @@ class BooksController < ApplicationController
     books = books.where(status: @status) if Book::STATUSES.include?(@status)
     books = books.search(@q) if @q.present?
     books = books.joins(:tags).where(tags: { name: @tag }) if @tag.present?
-    @books = books.paginate(page: params[:page], per_page: PER_PAGE)
+
+    respond_to do |format|
+      format.html do
+        @books = books.paginate(page: params[:page], per_page: PER_PAGE)
+      end
+      format.json do
+        @books = books.paginate(page: params[:page], per_page: PER_PAGE)
+      end
+      format.csv do
+        send_data Book.to_csv(books),
+                  filename: "books-#{Date.today}.csv",
+                  type: 'text/csv'
+      end
+    end
   end
 
   def show
