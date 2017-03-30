@@ -8,4 +8,5 @@
   <% Book::STATUSES.each do |s| %>
     <%= link_to s, books_path(status: s) %>
   <% end %>
+  <span class="right"><%= link_to 'csv', books_path(format: :csv) %></span>
 </p>

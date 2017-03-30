@@ -1,4 +1,6 @@
 class Book < ApplicationRecord
+  include Exportable
+
   STATUSES = %w(unread reading read)
 
   belongs_to :user
@@ -22,9 +24,6 @@ class Book < ApplicationRecord
     where('title LIKE ? OR author LIKE ?', "%#{q}%", "%#{q}%")
   }
 
-  # pulling every read book into memory to count them by month was fine
-  # with 80 books and will not be fine later. sqlite has strftime and
-  # postgres has to_char, so pick one at runtime off the adapter.
   def self.month_expression
     if connection.adapter_name =~ /sqlite/i
       "strftime('%Y-%m', finished_on)"
