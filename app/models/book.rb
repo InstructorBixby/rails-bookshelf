@@ -15,6 +15,10 @@ class Book < ApplicationRecord
                                     allow_nil: true }
   validates :status, inclusion: { in: STATUSES }
   validates :rating, inclusion: { in: 1..5 }, allow_nil: true
+  # ran the goodreads import twice by accident and ended up with three
+  # copies of some books. allow_blank because most of mine have no
+  # isbn at all.
+  validates :isbn, uniqueness: { allow_blank: true }
 
   scope :unread, -> { where(status: 'unread') }
   scope :reading, -> { where(status: 'reading') }
