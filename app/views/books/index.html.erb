@@ -2,33 +2,29 @@
 
 <%= render 'search' %>
 
-<table>
-  <tr>
-    <th><%= link_to 'Title', books_path(sort: 'title', status: @status) %></th>
-    <th><%= link_to 'Author', books_path(sort: 'author', status: @status) %></th>
-    <th>Pages</th>
-    <th>Status</th>
-    <th><%= link_to 'Rating', books_path(sort: 'rating', status: @status) %></th>
-    <th>Tags</th>
-    <th></th>
-  </tr>
-  <% @books.each do |book| %>
+<% if @books.empty? %>
+  <p class="empty">
+    <% if @q.present? || @tag.present? %>
+      Nothing matches that.
+    <% else %>
+      No books yet.
+    <% end %>
+  </p>
+<% else %>
+  <table>
     <tr>
-      <td><%= link_to book.title, book %></td>
-      <td><%= book.author %></td>
-      <td><%= book.pages %></td>
-      <td><%= book.status %></td>
-      <td><%= book.stars %></td>
-      <td>
-        <% book.tags.each do |tag| %>
-          <%= link_to tag.name, books_path(tag: tag.name), class: 'tag' %>
-        <% end %>
-      </td>
-      <td><%= link_to 'Edit', edit_book_path(book) %></td>
+      <th><%= link_to 'Title', books_path(sort: 'title', status: @status) %></th>
+      <th><%= link_to 'Author', books_path(sort: 'author', status: @status) %></th>
+      <th>Pages</th>
+      <th>Status</th>
+      <th><%= link_to 'Rating', books_path(sort: 'rating', status: @status) %></th>
+      <th>Tags</th>
+      <th></th>
     </tr>
-  <% end %>
-</table>
+    <%= render partial: 'row', collection: @books, as: :book %>
+  </table>
 
-<%= will_paginate @books %>
+  <%= will_paginate @books %>
+<% end %>
 
 <%= link_to 'Add a book', new_book_path %>

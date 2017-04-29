@@ -1,0 +1,13 @@
+<tr>
+  <td><%= link_to book.title, book %></td>
+  <td><%= book.author %></td>
+  <td><%= book.pages %></td>
+  <td><%= book.status %></td>
+  <td><%= book.stars %></td>
+  <td>
+    <% book.tags.each do |tag| %>
+      <%= link_to tag.name, books_path(tag: tag.name), class: 'tag' %>
+    <% end %>
+  </td>
+  <td><%= link_to 'Edit', edit_book_path(book) %></td>
+</tr>
