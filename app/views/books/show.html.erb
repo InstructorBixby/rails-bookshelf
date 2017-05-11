@@ -1,3 +1,5 @@
+<% content_for :title, @book.title %>
+
 <h1><%= @book.title %></h1>
 
 <% if @book.cover_url.present? %>
@@ -27,7 +29,7 @@
   <% @book.notes.each do |note| %>
     <li>
       <% if note.page %><span class="page">p<%= note.page %></span><% end %>
-      <%= note.body %>
+      <%= simple_format note.body %>
       <% if logged_in? %>
         <%= link_to 'x', book_note_path(@book, note), method: :delete %>
       <% end %>
