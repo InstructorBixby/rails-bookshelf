@@ -26,6 +26,7 @@ namespace :books do
 
       pages = row['Number of Pages'].to_s.strip
       pages = nil if pages.empty?
+      pages = Integer(pages, 10) unless pages.nil?
 
       date = row['Date Read'].to_s.strip
       date = nil if date.empty?
