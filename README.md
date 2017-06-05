@@ -44,3 +44,5 @@ things i would do differently
 * tag_list= creates tags that nothing ever cleans up, so the tags table
   has junk in it from typos.
 * no tests on the views at all.
+* the stats page counts everyone's books, not just mine. it was a
+  single user app when i wrote that query and i never went back to it.
